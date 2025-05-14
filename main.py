@@ -1,5 +1,6 @@
 import sys
-from commands.creates import generate_graph, generate_user_graph
+from commands.graph_creation import generate_graph, generate_user_graph
+from commands.searching import edge_exists, get_neighbors_matrix, bfs, dfs
 
 def print_graph(graph, graph_type):
     if graph_type == 'matrix':
@@ -30,7 +31,6 @@ def main():
         return
 
     try:
-
         graph_type = input("type> ")
 
         if graph_type not in ["matrix", "list", "table"]:
@@ -57,11 +57,32 @@ def main():
             command = input("action> ").strip().lower()
             if command == "print":
                 print_graph(graph, graph_type)
-            elif command == "exit":
-                print("Exiting program.")
-                break
+
             elif command == "help":
                 help()
+
+            elif command in ["bfs", "breath-first search"]:
+                if graph_type == "matrix":
+                    bfs(graph, 0, get_neighbors_matrix)
+
+            elif command in ["dfs", "depth-first search"]:
+                if graph_type == "matrix":
+                    dfs(graph, 0, get_neighbors_matrix)
+
+            elif command == "find":
+                u = int(input("from> ")) #starting node
+                v = int(input("to> ")) #ending node
+                if edge_exists(graph, graph_type, u, v):
+                    print(f"True: edge ({u},{v}) exists in the Graph!")
+                else:
+                    print(f"False: edge ({u},{v}) does not exist in the Graph!")
+
+            elif command == "exit":
+                print("Exiting program...")
+                break
+            
+            else:
+                print("Wrong command. Type 'help' for a list of commands.")
 
     except KeyboardInterrupt:
         print("\nExiting program...")

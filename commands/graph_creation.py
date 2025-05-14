@@ -35,8 +35,10 @@ def generate_user_graph(node_number, graph_type):
             graph.append([])
             for j in range(0,node_number):
                 graph[i].append(0)
+
         for i in range(node_number):
             line = input(f"{i+1}> ").split()
+            
             for j in range(len(line)):
                 x = int(line[j])
                 if i+1 == x:

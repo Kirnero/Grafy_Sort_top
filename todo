@@ -1,3 +1,9 @@
+# Zapomniałeś o supporcie heredoca ale dobra to jutro
+
+- heredoc
+    - fixing printing for heredoc, nodes> 7
+    - adding those sys functions in case program isnt correctly closed (optional)
+
 ☑ creations
 ☑ Printing
     ☑ matrix 
@@ -16,11 +22,11 @@
     ☑ list
     ☑ table
 
-1 Sort_Khan
-    1 matrix
-    1 list
-    1 table
-0 Sort_Tarjan
-    0 matrix
-    0 list
-    0 table
+☑ Sort_Khan
+    ☑ matrix
+    ☑ list
+    ☑ table
+☑ Sort_Tarjan
+    ☑ matrix
+    ☑ list
+    ☑ table

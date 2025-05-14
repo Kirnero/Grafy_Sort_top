@@ -1,10 +1,5 @@
 import sys
-
-def create(node_number, saturation):
-    print("create_func")
-
-def create_user(node_number):
-    print("create_user_func")
+from commands.creates import create, create_user
 
 def print_graph(graph):
     print("print_graph_func")
@@ -20,6 +15,7 @@ def main():
         print("Użycie: python program.py --generate/-g lub --user-provided/-u")
         return
 
+    gtype = input("Type> ")
     n = int(input("nodes> "))
     graph=[]
 
@@ -30,9 +26,9 @@ def main():
             saturation = int(input("saturation (0-100)> "))
         saturation = int(saturation) / 100
 
-        graph = create(n, saturation)
+        graph = create(n, gtype, saturation)
     elif sys.argv[1] in ["--user-provided", "-u"]:
-        graph = create_user(n)
+        graph = create_user(n, gtype)
 
     while True:
         command = input("> ").strip().lower()

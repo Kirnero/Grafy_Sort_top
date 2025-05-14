@@ -1,6 +1,6 @@
 import sys
 from commands.graph_creation import generate_graph, generate_user_graph
-from commands.searching import edge_exists, get_neighbors_matrix, bfs, dfs
+from commands.searching import edge_exists, get_neighbors_matrix, get_neighbors_list, bfs, dfs
 from commands.topologic_sorts import sort_graph
 
 def print_graph(graph, graph_type):
@@ -66,10 +66,13 @@ def main():
             elif command in ["bfs", "breath-first search"]:
                 if graph_type == "matrix":
                     bfs(graph, 0, get_neighbors_matrix)
-
+                elif graph_type == "list":
+                    bfs(graph, 0, get_neighbors_list)
             elif command in ["dfs", "depth-first search"]:
                 if graph_type == "matrix":
                     dfs(graph, 0, get_neighbors_matrix)
+                elif graph_type == "list":
+                    dfs(graph, 0, get_neighbors_list)
 
             elif command == "find":
                 u = int(input("from> ")) #starting node
@@ -83,7 +86,7 @@ def main():
             elif command == "exit":
                 print("Exiting program...")
                 break
-            
+
             else:
                 print("Wrong command. Type 'help' for a list of commands.")
 

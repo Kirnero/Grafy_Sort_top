@@ -14,6 +14,8 @@ def get_neighbors_matrix(graph, node):
             neighbors.append(i)
     return neighbors
         
+def get_neighbors_list(graph, node):
+    return graph[node]
 
 def bfs(graph, start, neighbors_func):
     visited = set()

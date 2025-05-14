@@ -1,19 +1,19 @@
 ☑ creations
-? Printing
+☑ Printing
     ☑ matrix 
-    ? list
+    ☑ list
     ? table /------------------> table i list mamy takie samo?
 ☑ Searching for vertices
     ☑ matrix
     ☑ list
-    ☑ table
-☑ BFS
+    ? table
+☐ BFS
     ☑ matrix
-    ☐ list
+    ☑ list
     ☐ table
-☑ DFS
+☐ DFS
     ☑ matrix
-    ☐ list
+    ☑ list
     ☐ table
 
 /------------------> To teraz ja robię (Kirnero)

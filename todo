@@ -16,12 +16,11 @@
     ☑ list
     ☑ table
 
-/------------------> To teraz ja robię (Kirnero)
-☐ Sort_Khan
-    ☐ matrix
-    ☐ list
-    ☐ table
-☐ Sort_Tarjan
-    ☐ matrix
-    ☐ list
-    ☐ table
+1 Sort_Khan
+    1 matrix
+    1 list
+    1 table
+0 Sort_Tarjan
+    0 matrix
+    0 list
+    0 table

@@ -1,13 +1,13 @@
 
 
 def sort_graph(graph, graph_type, node_number):
-    initialize_sort = input("Sort type (khan/tarjan)> ")
-    while initialize_sort.lower() not in ["khan", "tarjan"]:
-        initialize_sort = input("Sort type (khan/tarjan)> ")
-        if initialize_sort.lower() not in ["khan", "tarjan"]:
-            print("Invalid sort type. Choose 'khan' or 'tarjan'.")
-    if initialize_sort.lower() == "khan":
-        khan_sort(graph[:], graph_type, node_number)
+    initialize_sort = input("Sort type (kahn/tarjan)> ")
+    while initialize_sort.lower() not in ["kahn", "tarjan"]:
+        initialize_sort = input("Sort type (kahn/tarjan)> ")
+        if initialize_sort.lower() not in ["kahn", "tarjan"]:
+            print("Invalid sort type. Choose 'kahn' or 'tarjan'.")
+    if initialize_sort.lower() == "kahn":
+        kahn_sort(graph[:], graph_type, node_number)
     else:
         tarjan_sort(graph[:], graph_type, node_number)
 
@@ -50,7 +50,7 @@ def node_without_incoming_edges(graph, graph_type, node_number):
     return -1
 
 
-def khan_sort(graph, graph_type, node_number):
+def kahn_sort(graph, graph_type, node_number):
     sorted_nodes = []
     while len(sorted_nodes) < node_number:
         node = node_without_incoming_edges(graph, graph_type, node_number)

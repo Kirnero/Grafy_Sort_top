@@ -42,14 +42,14 @@ def is_valid_argument():
 def main():
     try:
         if not is_valid_argument():
-            print("Użycie: python program.py --generate/-g lub --user-provided/-u")
+            print("Usage: python program.py --generate/-g lub --user-provided/-u")
             return
         
         graph=[]
         graph_type = input("type> ")
 
         if graph_type not in ["matrix", "list", "table"]:
-            print("Niepoprawny typ grafu. Wybierz 'matrix', 'list' lub 'table'.")
+            print("Invalid graph type. Please choose from 'matrix', 'list', or 'table'.")
             return
 
         while True:
@@ -107,7 +107,7 @@ def main():
 
             elif command == "sort":
                 sort_graph(graph, graph_type)
-                
+
             elif command == "exit":
                 print("Exiting program...")
                 break

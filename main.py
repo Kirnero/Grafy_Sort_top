@@ -6,9 +6,17 @@ def create(node_number, saturation):
 def create_user(node_number):
     print("create_user_func")
 
-def print_graph(graph):
-    print("print_graph_func")
-
+def print_graph(graph, representation_type):
+    if representation_type == 'matrix':
+        n = len(graph)
+        print("  | ", ' '.join(str(i+1) for i in range(n)))
+        print("--+" + "-" * (2 * n))
+        for i, row in enumerate(graph):
+            print(f"{i+1} | ", ' '.join(str(val) for val in row))
+    else:
+        for i, neighbors in enumerate(graph):
+            print(f"{i+1}>", ' '.join(str(n+1) for n in neighbors))
+    
 def help():
     print('''Komendy:
     print - wyświetla graf (lista sąsiedztwa)
@@ -26,9 +34,9 @@ def main():
     if sys.argv[1] in ["--generate", "-g"]:
         saturation = None
 
-        while saturation not in range(0,101):
-            saturation = int(input("saturation (0-100)> "))
-        saturation = int(saturation) / 100
+        while saturation < 0 and saturation > 100:
+            saturation = float(input("saturation (0-100)> "))
+        saturation /= 100
 
         graph = create(n, saturation)
     elif sys.argv[1] in ["--user-provided", "-u"]:

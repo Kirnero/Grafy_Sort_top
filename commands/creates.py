@@ -2,11 +2,11 @@ from math import floor
 from random import randint
 import sys
 
-def create(node_number, type, saturation):
+def generate_graph(node_number, graph_type, saturation):
     graph=[]
     edge_number = floor(node_number*saturation)
 
-    if type == "matrix":
+    if graph_type == "matrix":
         for i in range(0, node_number):
             graph.append([])
             for j in range(0,node_number):
@@ -19,28 +19,28 @@ def create(node_number, type, saturation):
                     graph[a][b] = 1
                     break
 
-    elif type=="list":
+    elif graph_type=="list":
        pass
 
-    elif type=="table":
+    elif graph_type=="table":
         pass
 
     return graph
 
-def create_user(node_number, type):
+def generate_user_graph(node_number, graph_type):
     graph=[]
 
-    if type == "matrix":
+    if graph_type == "matrix":
         for i in range(0, node_number):
             graph.append([])
             for j in range(0,node_number):
                 graph[i].append(0)
         pass
 
-    elif type=="list":
+    elif graph_type=="list":
        pass
 
-    elif type=="table":
+    elif graph_type=="table":
         pass
 
     return graph

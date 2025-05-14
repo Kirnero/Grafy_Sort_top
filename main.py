@@ -3,6 +3,7 @@ from commands.graph_creation import generate_graph, generate_user_graph
 from commands.searching import edge_exists, get_neighbors_matrix, bfs, dfs
 
 def print_graph(graph, graph_type):
+    print(f"Graph type: {graph_type}")
     if graph_type == 'matrix':
         n = len(graph)
         print("  | ", ' '.join(str(i+1) for i in range(n)))

@@ -4,7 +4,6 @@ from commands.topologic_sorts import sort_graph
 import commands.searching as searching
 
 def print_graph(graph, graph_type):
-    print(graph)
     print(f"Graph type: {graph_type}")
     if graph_type == 'matrix':
         n = len(graph)
@@ -16,13 +15,19 @@ def print_graph(graph, graph_type):
         for i, neighbors in enumerate(graph):
             print(f"{i+1}>", ' '.join(str(n+1) for n in neighbors))
     elif graph_type == 'table':
+        if not graph:
+            print("Graph is empty.")
         for edge in graph:
             print(f"{edge[0]+1} {edge[1]+1}")
 
 def get_saturation():
     saturation = None
-    while not saturation or saturation < 0 and saturation > 100:
-        saturation = float(input("saturation (0-100)> "))
+    while not saturation or saturation < 0 or saturation > 100:
+        try:
+            saturation = float(input("saturation (0-100)> "))
+        except ValueError:
+            print("Invalid input. Please enter a numeric value.")
+            saturation = None
     return saturation / 100
 
 def help():
@@ -31,30 +36,39 @@ def help():
     exit - kończy program
     help - wyświetla pomoc''')
 
-def main():
-    if len(sys.argv) < 2 or sys.argv[1] not in ["--generate", "--user-provided", "-g", "-u"]:
-        print("Użycie: python program.py --generate/-g lub --user-provided/-u")
-        return
+def is_valid_argument():
+    return len(sys.argv) >= 2 and sys.argv[1] in ["--generate", "--user-provided", "-g", "-u"]
 
+def main():
     try:
+        if not is_valid_argument():
+            print("Użycie: python program.py --generate/-g lub --user-provided/-u")
+            return
+        
+        graph=[]
         graph_type = input("type> ")
 
         if graph_type not in ["matrix", "list", "table"]:
             print("Niepoprawny typ grafu. Wybierz 'matrix', 'list' lub 'table'.")
             return
 
-        n = int(input("nodes> "))
-        graph=[]
-
+        while True:
+            try:
+                n = int(input("nodes> "))
+                if n <= 0:
+                    raise ValueError
+                break
+            except ValueError:
+                print("Wpisz poprawną liczbę wierzchołków.")
+            
         if sys.argv[1] in ["--generate", "-g"]:
             saturation = get_saturation()
             graph = generate_graph(n, graph_type, saturation)
-            
         elif sys.argv[1] in ["--user-provided", "-u"]:
-
             graph = generate_user_graph(n, graph_type)
         
         if graph is None:
+            print("Could not create graph. Please check your input.")
             return
         
         print("Graph created successfully.")
@@ -74,6 +88,7 @@ def main():
                     searching.bfs(graph, 0, searching.get_neighbors_list)
                 elif graph_type == "table":
                     searching.bfs(graph, 0, searching.get_neighbors_table)
+
             elif command in ["dfs", "depth-first search"]:
                 if graph_type == "matrix":
                     searching.dfs(graph, 0, searching.get_neighbors_matrix)
@@ -89,8 +104,10 @@ def main():
                     print(f"True: edge ({u},{v}) exists in the Graph!")
                 else:
                     print(f"False: edge ({u},{v}) does not exist in the Graph!")
+
             elif command == "sort":
                 sort_graph(graph, graph_type)
+                
             elif command == "exit":
                 print("Exiting program...")
                 break

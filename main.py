@@ -106,7 +106,7 @@ def main():
                     print(f"False: edge ({u},{v}) does not exist in the Graph!")
 
             elif command == "sort":
-                sort_graph(graph, graph_type)
+                sort_graph(graph, graph_type,n)
 
             elif command == "exit":
                 print("Exiting program...")

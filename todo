@@ -2,19 +2,19 @@
 ☑ Printing
     ☑ matrix 
     ☑ list
-    ? table /------------------> table i list mamy takie samo?
+    ☑
 ☑ Searching for vertices
     ☑ matrix
     ☑ list
-    ? table
-☐ BFS
+    ☑ table
+☑ BFS
     ☑ matrix
     ☑ list
-    ☐ table
-☐ DFS
+    ☑ table
+☑ DFS
     ☑ matrix
     ☑ list
-    ☐ table
+    ☑ table
 
 /------------------> To teraz ja robię (Kirnero)
 ☐ Sort_Khan

@@ -1,9 +1,10 @@
 import sys
 from commands.graph_creation import generate_graph, generate_user_graph
-from commands.searching import edge_exists, get_neighbors_matrix, get_neighbors_list, bfs, dfs
 from commands.topologic_sorts import sort_graph
+import commands.searching as searching
 
 def print_graph(graph, graph_type):
+    print(graph)
     print(f"Graph type: {graph_type}")
     if graph_type == 'matrix':
         n = len(graph)
@@ -11,9 +12,12 @@ def print_graph(graph, graph_type):
         print("--+" + "-" * (2 * n))
         for i, row in enumerate(graph):
             print(f"{i+1} | ", ' '.join(str(val) for val in row))
-    else:
+    elif graph_type == 'list':
         for i, neighbors in enumerate(graph):
             print(f"{i+1}>", ' '.join(str(n+1) for n in neighbors))
+    elif graph_type == 'table':
+        for edge in graph:
+            print(f"{edge[0]+1} {edge[1]+1}")
 
 def get_saturation():
     saturation = None
@@ -65,19 +69,23 @@ def main():
 
             elif command in ["bfs", "breath-first search"]:
                 if graph_type == "matrix":
-                    bfs(graph, 0, get_neighbors_matrix)
+                    searching.bfs(graph, 0, searching.get_neighbors_matrix)
                 elif graph_type == "list":
-                    bfs(graph, 0, get_neighbors_list)
+                    searching.bfs(graph, 0, searching.get_neighbors_list)
+                elif graph_type == "table":
+                    searching.bfs(graph, 0, searching.get_neighbors_table)
             elif command in ["dfs", "depth-first search"]:
                 if graph_type == "matrix":
-                    dfs(graph, 0, get_neighbors_matrix)
+                    searching.dfs(graph, 0, searching.get_neighbors_matrix)
                 elif graph_type == "list":
-                    dfs(graph, 0, get_neighbors_list)
+                    searching.dfs(graph, 0, searching.get_neighbors_list)
+                elif graph_type == "table":
+                    searching.dfs(graph, 0, searching.get_neighbors_table)
 
             elif command == "find":
                 u = int(input("from> ")) #starting node
                 v = int(input("to> ")) #ending node
-                if edge_exists(graph, graph_type, u, v):
+                if searching.edge_exists(graph, graph_type, u, v):
                     print(f"True: edge ({u},{v}) exists in the Graph!")
                 else:
                     print(f"False: edge ({u},{v}) does not exist in the Graph!")

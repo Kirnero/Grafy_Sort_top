@@ -17,6 +17,14 @@ def get_neighbors_matrix(graph, node):
 def get_neighbors_list(graph, node):
     return graph[node]
 
+def get_neighbors_table(graph, node):
+    neighbors = []
+    for edge in graph:
+        start, end = edge
+        if start == node:
+            neighbors.append(end)
+    return neighbors
+
 def bfs(graph, start, neighbors_func):
     visited = set()
     queue = [start]

@@ -1,4 +1,4 @@
-
+import copy
 
 def sort_graph(graph, graph_type, node_number):
     initialize_sort = input("Sort type (kahn/tarjan)> ")
@@ -51,6 +51,9 @@ def node_without_incoming_edges(graph, graph_type, node_number):
 
 
 def kahn_sort(graph, graph_type, node_number):
+
+    graph = copy.deepcopy(graph)
+
     sorted_nodes = []
     while len(sorted_nodes) < node_number:
         node = node_without_incoming_edges(graph, graph_type, node_number)
@@ -86,6 +89,44 @@ def kahn_sort(graph, graph_type, node_number):
     print("Sorted nodes:", ' '.join(map(str, [x + 1 for x in sorted_nodes])))
                 
             
-
 def tarjan_sort(graph, graph_type, node_number):
-    pass
+    visited_temp = [False] * node_number
+    visited_perm = [False] * node_number
+    result = []
+
+    def visit(n):
+        if visited_perm[n]:
+            return
+        if visited_temp[n]:
+            print("Graph is cyclic!")
+            raise Exception("Cycle detected")
+
+        visited_temp[n] = True
+
+        neighbors = []
+        if graph_type == "matrix":
+            for i in range(node_number):
+                if graph[n][i] == 1:
+                    neighbors.append(i)
+
+        elif graph_type == "list":
+            neighbors = graph[n][:]
+
+        elif graph_type == "table":
+            for edge in graph:
+                if edge[0] == n:
+                    neighbors.append(edge[1])
+
+        for m in neighbors:
+            visit(m)
+
+        visited_temp[n] = False
+        visited_perm[n] = True
+        result.insert(0, n)
+        print("Current sorted nodes:", ' '.join(map(str, [x + 1 for x in result])))
+
+    
+    for node in range(node_number):
+        if not visited_perm[node]:
+            visit(node)
+    print("Sorted nodes:", ' '.join(map(str, [x + 1 for x in result])))

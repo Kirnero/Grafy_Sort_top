@@ -35,7 +35,21 @@ def generate_user_graph(node_number, graph_type):
             graph.append([])
             for j in range(0,node_number):
                 graph[i].append(0)
-        pass
+        for i in range(node_number):
+            line = input(f"{i+1}> ").split()
+            for j in range(len(line)):
+                x = int(line[j])
+                if i+1 == x:
+                    print("Can't add self-loop")
+                    continue
+
+                if x > node_number or x < 1:
+                    print("Invalid node number")
+                    return None
+
+                graph[i][x-1] = 1
+        
+        return graph
 
     elif graph_type=="list":
        pass

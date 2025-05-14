@@ -45,8 +45,11 @@ def main():
             graph = generate_graph(n, graph_type, saturation)
             
         elif sys.argv[1] in ["--user-provided", "-u"]:
-            saturation = get_saturation()
-            graph = generate_user_graph(n, graph_type, saturation)
+
+            graph = generate_user_graph(n, graph_type)
+        
+        if graph is None:
+            return
         
         print("Graph created successfully.")
 

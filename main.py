@@ -1,6 +1,7 @@
 import sys
 from commands.graph_creation import generate_graph, generate_user_graph
 from commands.searching import edge_exists, get_neighbors_matrix, bfs, dfs
+from commands.topologic_sorts import sort_graph
 
 def print_graph(graph, graph_type):
     print(f"Graph type: {graph_type}")
@@ -77,7 +78,8 @@ def main():
                     print(f"True: edge ({u},{v}) exists in the Graph!")
                 else:
                     print(f"False: edge ({u},{v}) does not exist in the Graph!")
-
+            elif command == "sort":
+                sort_graph(graph, graph_type)
             elif command == "exit":
                 print("Exiting program...")
                 break

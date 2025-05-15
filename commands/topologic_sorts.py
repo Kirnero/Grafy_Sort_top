@@ -1,12 +1,19 @@
 import copy
+import sys
 
 def sort_graph(graph, graph_type, node_number):
-    initialize_sort = input("Sort type (kahn/tarjan)> ")
-    while initialize_sort.lower() not in ["kahn", "tarjan"]:
-        initialize_sort = input("Sort type (kahn/tarjan)> ")
-        if initialize_sort.lower() not in ["kahn", "tarjan"]:
+    selected_sort = None
+
+    while True:
+        selected_sort = input("Sort type (kahn/tarjan)> ")
+        if not sys.stdin.isatty(): print(selected_sort)
+
+        if selected_sort.lower() not in ["kahn", "tarjan"]:
             print("Invalid sort type. Choose 'kahn' or 'tarjan'.")
-    if initialize_sort.lower() == "kahn":
+        else:
+            break
+    
+    if selected_sort.lower() == "kahn":
         kahn_sort(graph[:], graph_type, node_number)
     else:
         tarjan_sort(graph[:], graph_type, node_number)
@@ -43,7 +50,7 @@ def node_without_incoming_edges(graph, graph_type, node_number):
             if candidate not in candidates and candidate != -1: candidates.append(graph[i][0])
         for i in range(len(graph)):
             if -1 in graph[i]: continue
-            print(candidates)
+            #print(candidates)
             if graph[i][1] in candidates:
                 candidates.remove(graph[i][1])
         return candidates[0]
@@ -85,7 +92,7 @@ def kahn_sort(graph, graph_type, node_number):
 
         #Removing done
 
-        print("Current sorted nodes:", ' '.join(map(str, [x + 1 for x in sorted_nodes])))
+        #print("Current sorted nodes:", ' '.join(map(str, [x + 1 for x in sorted_nodes])))
     print("Sorted nodes:", ' '.join(map(str, [x + 1 for x in sorted_nodes])))
                 
             
@@ -123,7 +130,7 @@ def tarjan_sort(graph, graph_type, node_number):
         visited_temp[n] = False
         visited_perm[n] = True
         result.insert(0, n)
-        print("Current sorted nodes:", ' '.join(map(str, [x + 1 for x in result])))
+        #print("Current sorted nodes:", ' '.join(map(str, [x + 1 for x in result])))
 
     
     for node in range(node_number):

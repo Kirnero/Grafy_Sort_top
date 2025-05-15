@@ -13,8 +13,8 @@ def generate_graph(node_number, graph_type, saturation):
                 graph[i].append(0)
         for i in range(edge_number):
             while True:
-                a = randint(0, node_number-1)
-                b = randint(0, node_number-1)
+                a = randint(0, node_number - 1)
+                b = randint(0, node_number - 1)
                 if a<b and graph[a][b] == 0:
                     graph[a][b] = 1
                     break
@@ -57,7 +57,11 @@ def generate_user_graph(node_number, graph_type):
             line = line.split()
             
             for j in range(len(line)):
-                x = int(line[j])
+                try:
+                    x = int(line[j])
+                except ValueError:
+                    print(f"Invalid input: '{line[j]}' is not a number")
+                    return None
                 if i+1 == x:
                     print("Can't add self-loop")
                     continue
@@ -78,7 +82,11 @@ def generate_user_graph(node_number, graph_type):
             line = line.split()
             
             for j in range(len(line)):
-                x = int(line[j])
+                try:
+                    x = int(line[j])
+                except ValueError:
+                    print(f"Invalid input: '{line[j]}' is not a number")
+                    return None
                 if i+1 == x:
                     print("Can't add self-loop")
                     continue
@@ -95,7 +103,11 @@ def generate_user_graph(node_number, graph_type):
             if not sys.stdin.isatty(): print(line)
             line = line.split()
             for j in range(len(line)):
-                x = int(line[j])
+                try:
+                    x = int(line[j])
+                except ValueError:
+                    print(f"Invalid input: '{line[j]}' is not a number")
+                    return None
                 if i+1 == x:
                     print("Can't add self-loop")
                     continue

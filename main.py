@@ -131,6 +131,7 @@ def main():
                 print("\nEOF without exiting program. Ending file input...")
     except KeyboardInterrupt:
         print("\nExiting program...")
-
+    except Exception as e:
+        print(f"An error occurred: {e}")
 if __name__ == "__main__":
     main()

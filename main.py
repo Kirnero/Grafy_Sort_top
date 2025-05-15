@@ -47,7 +47,7 @@ def main():
         
         graph=[]
         graph_type = input("type> ")
-
+        if not sys.stdin.isatty(): print(graph_type)
         if graph_type not in ["matrix", "list", "table"]:
             print("Invalid graph type. Please choose from 'matrix', 'list', or 'table'.")
             return
@@ -55,6 +55,7 @@ def main():
         while True:
             try:
                 n = int(input("nodes> "))
+                if not sys.stdin.isatty(): print(n)
                 if n <= 0:
                     raise ValueError
                 break
@@ -75,6 +76,7 @@ def main():
 
         while True:
             command = input("action> ").strip().lower()
+            if not sys.stdin.isatty(): print(command)
             if command == "print":
                 print_graph(graph, graph_type)
 

@@ -1,8 +1,7 @@
-# Zapomniałeś o supporcie heredoca ale dobra to jutro
 
-- heredoc
-    - fixing printing for heredoc, nodes> 7
-    - adding those sys functions in case program isnt correctly closed (optional)
+☑ heredoc
+    ☑ fixing printing for heredoc, nodes> 7
+    ☑ adding those sys functions in case program isnt correctly closed (optional)
 
 ☑ creations
 ☑ Printing

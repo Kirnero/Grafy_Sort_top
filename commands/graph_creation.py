@@ -1,5 +1,6 @@
 from math import floor
 from random import randint
+import sys
 
 def generate_graph(node_number, graph_type, saturation):
     graph=[]
@@ -51,7 +52,9 @@ def generate_user_graph(node_number, graph_type):
                 graph[i].append(0)
 
         for i in range(node_number):
-            line = input(f"{i+1}> ").split()
+            line = input(f"{i+1}> ")
+            if not sys.stdin.isatty(): print(line)
+            line = line.split()
             
             for j in range(len(line)):
                 x = int(line[j])
@@ -70,7 +73,9 @@ def generate_user_graph(node_number, graph_type):
             graph.append([])
 
        for i in range(node_number):
-            line = input(f"{i+1}> ").split()
+            line = input(f"{i+1}> ")
+            if not sys.stdin.isatty(): print(line)
+            line = line.split()
             
             for j in range(len(line)):
                 x = int(line[j])
@@ -86,8 +91,9 @@ def generate_user_graph(node_number, graph_type):
 
     elif graph_type=="table": # Tabela krawędzi
         for i in range(node_number):
-            line = input(f"{i+1}> ").split()
-            
+            line = input(f"{i+1}> ")
+            if not sys.stdin.isatty(): print(line)
+            line = line.split()
             for j in range(len(line)):
                 x = int(line[j])
                 if i+1 == x:

@@ -33,7 +33,7 @@ def get_saturation():
 
 def help():
     print('''Komendy:
-    print - wyświetla grafu
+    print - wyświetla graf w formie macierzy, listy sąsiedztwa lub tablicy
     bfs / breath-first search - przeszukuje graf wszerz
     dfs / depth-first search - przeszukuje grafu w głąb
     find - sprawdza czy w grafie istnieje podana krawędź
@@ -52,7 +52,6 @@ def main():
         
         graph=[]
         graph_type = input("type> ")
-        if not sys.stdin.isatty(): print(graph_type)
         if graph_type not in ["matrix", "list", "table"]:
             print("Invalid graph type. Please choose from 'matrix', 'list', or 'table'.")
             return
@@ -61,7 +60,6 @@ def main():
         while True:
             try:
                 n = int(input("nodes> "))
-                if not sys.stdin.isatty(): print(n)
                 if n <= 0:
                     raise ValueError
                 if not sys.stdin.isatty(): print(n)
@@ -130,7 +128,7 @@ def main():
                     print("Wrong command. Type 'help' for a list of commands.")
             except EOFError:
                 sys.stdin=open('/dev/tty')
-                print("\nEnding file input...")
+                print("\nEOF without exiting program. Ending file input...")
     except KeyboardInterrupt:
         print("\nExiting program...")
 

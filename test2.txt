@@ -1,0 +1,9 @@
+table
+6
+50
+print
+find
+1
+3
+dfs
+bfs

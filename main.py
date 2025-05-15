@@ -28,11 +28,16 @@ def get_saturation():
         except ValueError:
             print("Invalid input. Please enter a numeric value.")
             saturation = None
+    if not sys.stdin.isatty(): print(saturation)
     return saturation / 100
 
 def help():
     print('''Komendy:
-    print - wyświetla graf (lista sąsiedztwa)
+    print - wyświetla grafu
+    bfs / breath-first search - przeszukuje graf wszerz
+    dfs / depth-first search - przeszukuje grafu w głąb
+    find - sprawdza czy w grafie istnieje podana krawędź
+    sort - sortuje graf topologicznie algorytmem Kahna lub Tarjana
     exit - kończy program
     help - wyświetla pomoc''')
 
@@ -51,6 +56,7 @@ def main():
         if graph_type not in ["matrix", "list", "table"]:
             print("Invalid graph type. Please choose from 'matrix', 'list', or 'table'.")
             return
+        if not sys.stdin.isatty(): print(graph_type)
 
         while True:
             try:
@@ -58,9 +64,10 @@ def main():
                 if not sys.stdin.isatty(): print(n)
                 if n <= 0:
                     raise ValueError
+                if not sys.stdin.isatty(): print(n)
                 break
             except ValueError:
-                print("Wpisz poprawną liczbę wierzchołków.")
+                print("Enter a positive integer for the number of nodes.")
             
         if sys.argv[1] in ["--generate", "-g"]:
             saturation = get_saturation()
@@ -72,54 +79,59 @@ def main():
             print("Could not create graph. Please check your input.")
             return
         
+        if not sys.stdin.isatty(): print("Data inserted successfully.")
         print("Graph created successfully.")
 
         while True:
-            command = input("action> ").strip().lower()
-            if not sys.stdin.isatty(): print(command)
-            if command == "print":
-                print_graph(graph, graph_type)
+            try:
+                command = input("action> ").strip().lower()
+                if not sys.stdin.isatty(): print(command)
 
-            elif command == "help":
-                help()
+                if command == "print":
+                    print_graph(graph, graph_type)
 
-            elif command in ["bfs", "breath-first search"]:
-                if graph_type == "matrix":
-                    searching.bfs(graph, 0, searching.get_neighbors_matrix)
-                elif graph_type == "list":
-                    searching.bfs(graph, 0, searching.get_neighbors_list)
-                elif graph_type == "table":
-                    searching.bfs(graph, 0, searching.get_neighbors_table)
+                elif command == "help":
+                    help()
 
-            elif command in ["dfs", "depth-first search"]:
-                if graph_type == "matrix":
-                    searching.dfs(graph, 0, searching.get_neighbors_matrix)
-                elif graph_type == "list":
-                    searching.dfs(graph, 0, searching.get_neighbors_list)
-                elif graph_type == "table":
-                    searching.dfs(graph, 0, searching.get_neighbors_table)
+                elif command in ["bfs", "breath-first search"]:
+                    if graph_type == "matrix":
+                        searching.bfs(graph, 0, searching.get_neighbors_matrix)
+                    elif graph_type == "list":
+                        searching.bfs(graph, 0, searching.get_neighbors_list)
+                    elif graph_type == "table":
+                        searching.bfs(graph, 0, searching.get_neighbors_table)
 
-            elif command == "find":
-                u = int(input("from> ")) #starting node
-                v = int(input("to> ")) #ending node
-                if searching.edge_exists(graph, graph_type, u, v):
-                    print(f"True: edge ({u},{v}) exists in the Graph!")
+                elif command in ["dfs", "depth-first search"]:
+                    if graph_type == "matrix":
+                        searching.dfs(graph, 0, searching.get_neighbors_matrix)
+                    elif graph_type == "list":
+                        searching.dfs(graph, 0, searching.get_neighbors_list)
+                    elif graph_type == "table":
+                        searching.dfs(graph, 0, searching.get_neighbors_table)
+
+                elif command == "find":
+                    u = int(input("from> ")) #starting node
+                    if not sys.stdin.isatty(): print(u)
+                    v = int(input("to> ")) #ending node
+                    if not sys.stdin.isatty(): print(v)
+                    if searching.edge_exists(graph, graph_type, u, v):
+                        print(f"True: edge ({u},{v}) exists in the Graph!")
+                    else:
+                        print(f"False: edge ({u},{v}) does not exist in the Graph!")
+
+                elif command == "sort":
+                    sort_graph(graph, graph_type, n)
+
+                elif command == "exit":
+                    print("Exiting program...")
+                    break
+
                 else:
-                    print(f"False: edge ({u},{v}) does not exist in the Graph!")
-
-            elif command == "sort":
-                sort_graph(graph, graph_type, n)
-
-            elif command == "exit":
-                print("Exiting program...")
-                break
-
-            else:
-                print("Wrong command. Type 'help' for a list of commands.")
-
+                    print("Wrong command. Type 'help' for a list of commands.")
+            except EOFError:
+                sys.stdin=open('/dev/tty')
+                print("\nEnding file input...")
     except KeyboardInterrupt:
-        print("\nExiting program...")
-    except EOFError:
         print("\nExiting program...")
 
 if __name__ == "__main__":

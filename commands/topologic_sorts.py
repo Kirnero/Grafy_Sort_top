@@ -6,17 +6,15 @@ def sort_graph(graph, graph_type, node_number):
 
     while True:
         selected_sort = input("Sort type (kahn/tarjan)> ")
-        if not sys.stdin.isatty(): print(selected_sort)
-
-        if selected_sort.lower() not in ["kahn", "tarjan"]:
-            print("Invalid sort type. Choose 'kahn' or 'tarjan'.")
-        else:
+        if selected_sort.lower() in ["kahn", "tarjan"]:
             break
+        print("Invalid sort type. Choose 'kahn' or 'tarjan'.")
     
+    if not sys.stdin.isatty(): print(selected_sort)
     if selected_sort.lower() == "kahn":
         kahn_sort(graph[:], graph_type, node_number)
     else:
-        tarjan_sort(graph[:], graph_type, node_number)
+        tarjan_sort(graph, graph_type, node_number)
 
 def node_without_incoming_edges(graph, graph_type, node_number):
     if graph_type == "matrix":
@@ -38,7 +36,6 @@ def node_without_incoming_edges(graph, graph_type, node_number):
             for j in range(len(graph[i])):
                 if graph[i][j] in candidates:
                     candidates.remove(graph[i][j])
-                    print(candidates)
         return candidates[0]
 
     elif graph_type == "table":

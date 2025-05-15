@@ -2,6 +2,7 @@ import sys
 from commands.graph_creation import generate_graph, generate_user_graph
 from commands.topologic_sorts import sort_graph
 import commands.searching as searching
+from commands.tikz_export import export_graph_tikz
 
 def print_graph(graph, graph_type):
     print(f"Graph type: {graph_type}")
@@ -119,7 +120,9 @@ def main():
 
                 elif command == "sort":
                     sort_graph(graph, graph_type, n)
-
+                elif command == "export":
+                    tikz_graph =export_graph_tikz(graph, graph_type)       
+                    print(tikz_graph)
                 elif command == "exit":
                     print("Exiting program...")
                     break

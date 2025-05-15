@@ -11,7 +11,7 @@ def export_graph_tikz(graph, graph_type):
         for i in range(n)
     }
 
-    tikz = ["\\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2cm,thick,main node/.style={circle,draw}]"]
+    tikz = ["\\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,thick,main node/.style={circle,draw}]"]
 
     for i in range(n):
         x, y = positions[i]

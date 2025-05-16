@@ -43,7 +43,7 @@ def help():
     help - wyświetla pomoc''')
 
 def is_valid_argument():
-    return len(sys.argv) >= 2 and sys.argv[1] in ["--generate", "--user-provided", "-g", "-u"]
+    return len(sys.argv) == 2 and sys.argv[1] in ["--generate", "--user-provided", "-g", "-u"]
 
 def main():
     try:
@@ -52,7 +52,7 @@ def main():
             return
         
         graph=[]
-        graph_type = input("type> ")
+        graph_type = input("type> ").lower()
         if graph_type not in ["matrix", "list", "table"]:
             print("Invalid graph type. Please choose from 'matrix', 'list', or 'table'.")
             return
@@ -120,18 +120,22 @@ def main():
 
                 elif command == "sort":
                     sort_graph(graph, graph_type, n)
+
                 elif command == "export":
                     tikz_graph =export_graph_tikz(graph, graph_type)       
                     print(tikz_graph)
+
                 elif command == "exit":
                     print("Exiting program...")
                     break
 
                 else:
                     print("Wrong command. Type 'help' for a list of commands.")
+
             except EOFError:
                 sys.stdin=open('/dev/tty')
                 print("\nEOF without exiting program. Ending file input...")
+
     except KeyboardInterrupt:
         print("\nExiting program...")
     except Exception as e:

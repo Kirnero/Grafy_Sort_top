@@ -70,7 +70,10 @@ def generate_user_graph(node_number, graph_type):
                     print("Invalid node number")
                     return None
 
-                graph[i][x-1] = 1
+                if graph[i][x-1] != 1:
+                    graph[i][x-1] = 1
+                else:
+                    print(f"Duplicate edge: {i+1} -> {x}")
 
     elif graph_type=="list": # Lista następników
        for i in range(node_number):

@@ -3,7 +3,7 @@ list
 50
 print
 sort
-Kahn
+Tarjan
 find
 1
 3

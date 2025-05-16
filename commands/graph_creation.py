@@ -95,7 +95,10 @@ def generate_user_graph(node_number, graph_type):
                     print("Invalid node number")
                     return None
 
-                graph[i].append(x-1)
+                if (x-1) not in graph[i]:  # Zapobiega duplikatom
+                    graph[i].append(x-1)
+                else:
+                    print(f"Duplicate edge: {i+1} -> {x}")
 
     elif graph_type=="table": # Tabela krawędzi
         for i in range(node_number):
@@ -116,6 +119,10 @@ def generate_user_graph(node_number, graph_type):
                     print("Invalid node number")
                     return None
 
-                graph.append([i,x-1])
+                edge = [i, x-1]
+                if edge not in graph:  # Zapobiega duplikatom
+                    graph.append(edge)
+                else:
+                    print(f"Duplicate edge: {i+1} -> {x}")
 
     return graph

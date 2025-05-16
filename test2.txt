@@ -1,9 +1,9 @@
-table
+list
 6
-50
+2
+1 1 1
+
+
+
+
 print
-find
-1
-3
-dfs
-bfs
